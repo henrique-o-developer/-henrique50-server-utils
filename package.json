@@ -1,10 +1,10 @@
 {
-  "name": "@henrique50/server-utils",
+  "name": "server-utils",
   "version": "1.0.0",
   "description": "",
   "main": "su.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\""
   },
   "author": "",
   "license": "ISC",
