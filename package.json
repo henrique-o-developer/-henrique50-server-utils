@@ -5,7 +5,7 @@
   "main": "server-utils-by-henrique-o-developer.js",
   "scripts": {
     "test": "echo \"Error: no test specified\"",
-    "update-to-git": "git add * && git commit -m \"new-release\" && git push origin master && np"
+    "update-to-git": "git add * && git add . && git commit -m \"new-release\" && git push origin master && np"
   },
   "author": "",
   "license": "ISC",
