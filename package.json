@@ -4,9 +4,9 @@
   "description": "",
   "main": "server-utils-by-henrique-o-developer.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\"",
     "update-to-git": "git add * && git add . && git commit -m \"new-release\" && git push origin master",
-    "update": "clear; git add *; git add .; git commit -m \"new-release\"; git push origin master; np",
-    "test": "node test.js"
+    "update": "clear; git add *; git add .; git commit -m \"new-release\"; git push origin master; np"
   },
   "author": "",
   "license": "ISC",
