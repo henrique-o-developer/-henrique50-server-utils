@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\"",
     "update-to-git": "git add * && git add . && git commit -m \"new-release\" && git push origin master",
-    "update": "git add *; git add .; git commit -m \"new-release\"; git push origin master; np; clear",
+    "update": "clear; git add *; git add .; git commit -m \"new-release\"; git push origin master; np",
     "test": "node text.js"
   },
   "author": "",
