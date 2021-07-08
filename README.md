@@ -21,7 +21,7 @@ como usar:<br>
 o primeiro argumento é o diretorio onde estão suas files para o express, o segundo é se você já tem um server express e quer usa-lo.<br>
 caso não tenha servidor pode usar 2 parametros:
 ```js
-        var pages = new server_utils("./pages/", false) || new server_utils("./pages/", {port: 3000 /*defautl*/, useSocket: true /*default*/})
+    var pages = new server_utils("./pages/", false) || new server_utils("./pages/", {port: 3000 /*defautl*/, useSocket: true /*default*/})
 ```
 caso já tenha um servidor express use: `app.use(pages.getRoutes())`<br>
 
