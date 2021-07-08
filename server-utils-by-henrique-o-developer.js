@@ -144,7 +144,7 @@ class def {
                     const io = new Server(server);
                 }
                 app.use(this.routes)
-                server.listen(3000);
+                server.listen(port);
             } else {
                 const app = express();
                 const server = http.createServer(app);
