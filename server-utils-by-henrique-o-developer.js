@@ -90,7 +90,7 @@ class def {
                 }
             }
         })
-
+        console.log(folders)
         while (folders.length > 0) {
             var data = fs.readdirSync(folders[0])
             data.forEach((file) => {
