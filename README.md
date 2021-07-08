@@ -15,4 +15,26 @@ como usar:
 `var pages = server_utils("./pages/", false)` 
 
 o primeiro argumento é o diretorio onde estão suas files para o express, o segundo é se você já tem um server express e quer usa-lo
- 
+
+
+as files express podem ser: 
+    .html
+    .js
+
+o conteudo de uma file .js deve ser: 
+
+```js
+    module.exports = (req, res, params) => {
+        res.send("conteudo")
+    }
+```
+
+o contedudo html pode variar 
+
+o nome dos arquivos ou pastas importa veja o exemplo:
+
+```txt
+    root/get/.js > esse arquivo sera carregado como get
+    root/.js > esse arquivo tambem sera carregado como get
+    root/post.js > esse arquivo sera carregado como post
+```
