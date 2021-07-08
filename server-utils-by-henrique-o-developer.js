@@ -133,10 +133,10 @@ class def {
                             }
                         }
                     }
-                })
+                }
                 delete folders[0]
                 folders.splice(0, 1)
-            }
+            })
         }
 
 
