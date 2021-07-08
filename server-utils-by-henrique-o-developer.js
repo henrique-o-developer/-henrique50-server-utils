@@ -50,7 +50,7 @@ class params {
 }
 
 class def {
-    constructor(path, haveServer) {
+    constructor(path, haveServer, debug) {
         this.root = path
         this.params = new params();
         this.routes = new express.Router();
