@@ -20,7 +20,7 @@ function isFolder(path, root) {
 class params {
     constructor() {
         this.defaults = [
-            `<!DOCTYPEhtml><htmllang="en"><head><metacharset="UTF-8"><metaname="viewport"content="width=device-width,initial-scale=1.0"><title>\${title}</title></head><body></body>\${body}</html>`
+            `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1.0"><title>\${title}</title></head><body></body>\${body}</html>`
         ];
     }
 
@@ -48,7 +48,7 @@ class params {
 }
 
 class def {
-    constructor(path) {
+    constructor(path, haveServer) {
         this.root = path
         this.params = new params();
         this.routes = new express.Router();
@@ -99,6 +99,16 @@ class def {
             })
             delete folders[0]
             folders.splice(0, 1)
+        }
+
+
+
+        if (haveServer || haveServer == false) {
+            if (typeof(haveServer) == "object") {
+                
+            } else {
+
+            }
         }
     }
 
