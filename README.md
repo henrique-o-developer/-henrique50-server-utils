@@ -55,3 +55,14 @@ você tambem pode utilizar o params ex:
         params.delDefault(1)
     }
 ```
+
+compativel com:
+    react
+    react-dom
+    express
+    socket.io
+    http
+    ...
+
+possivelmente incompativel com: 
+    next.js
