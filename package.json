@@ -15,5 +15,15 @@
     "fs": "0.0.1-security",
     "http": "0.0.1-security",
     "socket.io": "^4.1.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/henrique-o-developer/-henrique50-server-utils.git"
+  },
+  "keywords": [
+    "server",
+    "file-routing-system",
+    "socket",
+    "easy"
+  ]
 }
