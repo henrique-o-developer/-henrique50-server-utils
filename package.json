@@ -1,11 +1,11 @@
 {
   "name": "server-utils-by-henrique-o-developer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "server-utils-by-henrique-o-developer.js",
   "scripts": {
     "test": "echo \"Error: no test specified\"",
-    "update-to-git": "git add * && git add . && git commit -m \"new-release\" && git push origin master && np"
+    "update-to-git": "git add * && git add . && git commit -m \"new-release\" && git push origin master"
   },
   "author": "",
   "license": "ISC",
