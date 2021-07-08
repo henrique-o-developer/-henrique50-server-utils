@@ -1,5 +1,7 @@
 const fs = require('fs')
 const express = require('express');
+const http = require('http');
+const { Server } = require("socket.io");
 
 function isFolder(path, root) {
     if (!root.endsWith('/')) {
@@ -65,12 +67,26 @@ class def {
 
                 console.log(`rota ${route} está preparada para uso`)
                 if (route.includes("post")) {
-                    this.routes.post(route, require(path+"/"+file))
+                    if (file.split(".")[1] == "js") {
+                        this.routes.post(route, (req, res) => {
+                            require(path+"/"+file)(req, res, this.params)
+                        })
+                    } else if (file.split(".")[1] == "html") {
+                        this.routes.post(route, (req, res) => {
+                            res.send(fs.readFileSync(route+".html"))
+                        })
+                    }
                 }
                 if (!route.includes("post") || path.includes("get")) {
-                    this.routes.get(route, (req, res) => {
-                        require(path+"/"+file)(req, res, this.params)
-                    })
+                    if (file.split(".")[1] == "js") {
+                        this.routes.get(route, (req, res) => {
+                            require(path+"/"+file)(req, res, this.params)
+                        })
+                    } else if (file.split(".")[1] == "html") {
+                        this.routes.get(route, (req, res) => {
+                            res.send(fs.readFileSync(route+".html"))
+                        })
+                    }
                 }
             }
         })
@@ -88,12 +104,26 @@ class def {
                     console.log(`rota ${route} está preparada para uso`)
 
                     if (route.includes("post")) {
-                        this.routes.post(route, require(folders[0]+"/"+file))
+                        if (file.split(".")[1] == "js") {
+                            this.routes.post(route, (req, res) => {
+                                require(folders[0]+"/"+file)(req, res, this.params)
+                            })
+                        } else if (file.split(".")[1] == "html") {
+                            this.routes.post(route, (req, res) => {
+                                res.send(fs.readFileSync(route+".html"))
+                            })
+                        }
                     }
                     if (!route.includes("post") || path.includes("get")) {
-                        this.routes.get(route, (req, res) => {
-                            require(folders[0]+"/"+file)(req, res, this.params)
-                        })
+                        if (file.split(".")[1] == "js") {
+                            this.routes.get(route, (req, res) => {
+                                require(folders[0]+"/"+file)(req, res, this.params)
+                            })
+                        } else if (file.split(".")[1] == "html") {
+                            this.routes.get(route, (req, res) => {
+                                res.send(fs.readFileSync(route+".html"))
+                            })
+                        }
                     }
                 }
             })
@@ -105,9 +135,20 @@ class def {
 
         if (haveServer || haveServer == false) {
             if (typeof(haveServer) == "object") {
-                
+                const app = express();
+                const server = http.createServer(app);
+                const port = haveServer.port || 3000
+                if (haveServer.useSocket) {
+                    const io = new Server(server);
+                }
+                app.use(this.routes)
+                server.listen(3000);
             } else {
-
+                const app = express();
+                const server = http.createServer(app);
+                const io = new Server(server);
+                app.use(this.routes)
+                server.listen(3000);
             }
         }
     }
