@@ -1,8 +1,8 @@
 # server-utils-by-henrique-o-developer
 
-esse é um packege para npm desenvolvido para ajudar a criar um site ou api
+esse é um packege para npm desenvolvido para ajudar a criar um site ou api<br>
 
-como usar:
+como usar:<br>
 
 ```js
     - index.js -
@@ -12,17 +12,21 @@ como usar:
     var pages = new server_utils("./pages/", false)
 ```
 
-`var pages = new server_utils("./pages/", false)` 
+`var pages = new server_utils("./pages/", false)` <br>
 
-o primeiro argumento é o diretorio onde estão suas files para o express, o segundo é se você já tem um server express e quer usa-lo.
-caso já tenha um servidor express use: `app.use(pages.getRoutes())`
+o primeiro argumento é o diretorio onde estão suas files para o express, o segundo é se você já tem um server express e quer usa-lo.<br>
+caso não tenha servidor pode usar 2 parametros:
+```js
+        var pages = new server_utils("./pages/", false) || new server_utils("./pages/", {port: 3000 /*defautl*/, useSocket: true /*default*/})
+```
+caso já tenha um servidor express use: `app.use(pages.getRoutes())`<br>
 
 
-as files express podem ser: 
-    .html
-    .js
+as files express podem ser: <br>
+    .html<br>
+    .js<br>
 
-o conteudo de uma file .js deve ser: 
+o conteudo de uma file .js deve ser: <br>
 
 ```js
     module.exports = (req, res, params) => {
@@ -30,9 +34,9 @@ o conteudo de uma file .js deve ser:
     }
 ```
 
-o contedudo html pode variar 
+o contedudo html pode variar <br>
 
-o nome dos arquivos ou pastas importa veja o exemplo:
+o nome dos arquivos ou pastas importa veja o exemplo: <br>
 
 ```txt
     root/get/.js > esse arquivo sera carregado como get
@@ -41,7 +45,7 @@ o nome dos arquivos ou pastas importa veja o exemplo:
     root/get - post/.js > esse arquivo sera carregado como get e post
 ```
 
-você tambem pode utilizar o params ex: 
+você tambem pode utilizar o params ex: <br>
 
 ```js
     module.exports = (req, res, params) => {
@@ -57,13 +61,13 @@ você tambem pode utilizar o params ex:
     }
 ```
 
-compativel com:
-    react
-    react-dom
-    express
-    socket.io
-    http
-    ...
+compativel com:<br>
+    react<br>
+    react-dom<br>
+    express<br>
+    socket.io<br>
+    http<br>
+    ...<br>
 
-possivelmente incompativel com: 
-    next.js
+possivelmente incompativel com: <br>
+    next.js<br>
