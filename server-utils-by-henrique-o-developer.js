@@ -61,34 +61,36 @@ class def {
         var data = fs.readdirSync(path)
 
         data.forEach((file) => {
-            if (isFolder(file, path)) {
-                folders.push(path+"/"+file)
-            } else {
-                var route = "/"+file.split(".")[0].replace(/:/g, "/:")
+            if (!file.includes("ignore")) {
+                if (isFolder(file, path)) {
+                    folders.push(path+"/"+file)
+                } else {
+                    var route = "/"+file.split(".")[0].replace(/:/g, "/:")
 
-                route = route.replace("//", "/")
+                    route = route.replace("//", "/")
 
-                console.log(`rota ${route} está preparada para uso`)
-                if (route.includes("post")) {
-                    if (file.split(".")[1] == "js") {
-                        this.routes.post(route, (req, res) => {
-                            require(path+"/"+file)(req, res, this.params)
-                        })
-                    } else if (file.split(".")[1] == "html") {
-                        this.routes.post(route, (req, res) => {
-                            res.send(fs.readFileSync(path+"/"+file))
-                        })
+                    console.log(`rota ${route} está preparada para uso`)
+                    if (route.includes("post")) {
+                        if (file.split(".")[1] == "js") {
+                            this.routes.post(route, (req, res) => {
+                                require(path+"/"+file)(req, res, this.params)
+                            })
+                        } else if (file.split(".")[1] == "html") {
+                            this.routes.post(route, (req, res) => {
+                                res.send(fs.readFileSync(path+"/"+file))
+                            })
+                        }
                     }
-                }
-                if (!route.includes("post") || path.includes("get")) {
-                    if (file.split(".")[1] == "js") {
-                        this.routes.get(route, (req, res) => {
-                            require(path+"/"+file)(req, res, this.params)
-                        })
-                    } else if (file.split(".")[1] == "html") {
-                        this.routes.get(route, (req, res) => {
-                            res.send(fs.readFileSync(path+"/"+file, {encoding:'utf8', flag:'r'}))
-                        })
+                    if (!route.includes("post") || path.includes("get")) {
+                        if (file.split(".")[1] == "js") {
+                            this.routes.get(route, (req, res) => {
+                                require(path+"/"+file)(req, res, this.params)
+                            })
+                        } else if (file.split(".")[1] == "html") {
+                            this.routes.get(route, (req, res) => {
+                                res.send(fs.readFileSync(path+"/"+file, {encoding:'utf8', flag:'r'}))
+                            })
+                        }
                     }
                 }
             }
