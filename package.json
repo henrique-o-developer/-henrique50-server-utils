@@ -6,7 +6,7 @@
   "scripts": {
     "update-to-git": "git add * && git add . && git commit -m \"new-release\" && git push origin master",
     "update": "clear; git add *; git add .; git commit -m \"new-release\"; git push origin master; np",
-    "test": "node text.js"
+    "test": "node test.js"
   },
   "author": "",
   "license": "ISC",

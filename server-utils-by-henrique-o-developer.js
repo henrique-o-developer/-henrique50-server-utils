@@ -50,7 +50,10 @@ class params {
 }
 
 class def {
-    constructor(path, haveServer, debug) {
+    constructor(pathh, haveServer) {
+        var path = pathh
+        if (path.endsWith("/"))
+            path = path.slice(0, -1);
         this.root = path
         this.params = new params();
         this.routes = new express.Router();
@@ -73,7 +76,7 @@ class def {
                         })
                     } else if (file.split(".")[1] == "html") {
                         this.routes.post(route, (req, res) => {
-                            res.send(fs.readFileSync(route+".html"))
+                            res.send(fs.readFileSync(path+"/"+file))
                         })
                     }
                 }
@@ -84,13 +87,12 @@ class def {
                         })
                     } else if (file.split(".")[1] == "html") {
                         this.routes.get(route, (req, res) => {
-                            res.send(fs.readFileSync(route+".html"))
+                            res.send(fs.readFileSync(path+"/"+file, {encoding:'utf8', flag:'r'}))
                         })
                     }
                 }
             }
         })
-        console.log(folders)
         while (folders.length > 0) {
             var data = fs.readdirSync(folders[0])
             data.forEach((file) => {
@@ -110,7 +112,7 @@ class def {
                             })
                         } else if (file.split(".")[1] == "html") {
                             this.routes.post(route, (req, res) => {
-                                res.send(fs.readFileSync(route+".html"))
+                                res.send(fs.readFileSync(folders[0]+"/"+file))
                             })
                         }
                     }
@@ -121,7 +123,7 @@ class def {
                             })
                         } else if (file.split(".")[1] == "html") {
                             this.routes.get(route, (req, res) => {
-                                res.send(fs.readFileSync(route+".html"))
+                                res.send(fs.readFileSync(folders[0]+"/"+file))
                             })
                         }
                     }
