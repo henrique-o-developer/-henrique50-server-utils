@@ -37,4 +37,5 @@ o nome dos arquivos ou pastas importa veja o exemplo:
     root/get/.js > esse arquivo sera carregado como get
     root/.js > esse arquivo tambem sera carregado como get
     root/post.js > esse arquivo sera carregado como post
+    root/get - post/.js > esse arquivo sera carregado como get e post
 ```
