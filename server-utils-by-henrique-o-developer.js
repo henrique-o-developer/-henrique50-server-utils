@@ -96,41 +96,47 @@ class def {
         while (folders.length > 0) {
             var data = fs.readdirSync(folders[0])
             data.forEach((file) => {
-                if (isFolder(file, folders[0])) {
-                    folders.push(folders[0]+"/"+file)
+                if (file.includes("ignore")) {
+                    delete folders[0]
+                    folders.splice(0, 1)
+                    return
                 } else {
-                    var route = folders[0].replace(this.root, "")+"/"+file.split(".")[0].replace(/:/g, "/:")
+                    if (isFolder(file, folders[0])) {
+                        folders.push(folders[0]+"/"+file)
+                    } else {
+                        var route = folders[0].replace(this.root, "")+"/"+file.split(".")[0].replace(/:/g, "/:")
 
-                    route = route.replace("//", "/")
-                    
-                    console.log(`rota ${route} está preparada para uso`)
+                        route = route.replace("//", "/")
+                        
+                        console.log(`rota ${route} está preparada para uso`)
 
-                    if (route.includes("post")) {
-                        if (file.split(".")[1] == "js") {
-                            this.routes.post(route, (req, res) => {
-                                require(folders[0]+"/"+file)(req, res, this.params)
-                            })
-                        } else if (file.split(".")[1] == "html") {
-                            this.routes.post(route, (req, res) => {
-                                res.send(fs.readFileSync(folders[0]+"/"+file))
-                            })
+                        if (route.includes("post")) {
+                            if (file.split(".")[1] == "js") {
+                                this.routes.post(route, (req, res) => {
+                                    require(folders[0]+"/"+file)(req, res, this.params)
+                                })
+                            } else if (file.split(".")[1] == "html") {
+                                this.routes.post(route, (req, res) => {
+                                    res.send(fs.readFileSync(folders[0]+"/"+file))
+                                })
+                            }
+                        }
+                        if (!route.includes("post") || path.includes("get")) {
+                            if (file.split(".")[1] == "js") {
+                                this.routes.get(route, (req, res) => {
+                                    require(folders[0]+"/"+file)(req, res, this.params)
+                                })
+                            } else if (file.split(".")[1] == "html") {
+                                this.routes.get(route, (req, res) => {
+                                    res.send(fs.readFileSync(folders[0]+"/"+file))
+                                })
+                            }
                         }
                     }
-                    if (!route.includes("post") || path.includes("get")) {
-                        if (file.split(".")[1] == "js") {
-                            this.routes.get(route, (req, res) => {
-                                require(folders[0]+"/"+file)(req, res, this.params)
-                            })
-                        } else if (file.split(".")[1] == "html") {
-                            this.routes.get(route, (req, res) => {
-                                res.send(fs.readFileSync(folders[0]+"/"+file))
-                            })
-                        }
-                    }
-                }
-            })
-            delete folders[0]
-            folders.splice(0, 1)
+                })
+                delete folders[0]
+                folders.splice(0, 1)
+            }
         }
 
 

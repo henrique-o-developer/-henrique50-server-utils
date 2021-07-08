@@ -51,7 +51,8 @@ você tambem pode utilizar o params ex: <br>
     module.exports = (req, res, params) => {
         params.setDefault(1, "${html}")
 
-        // id of html
+        // 1 é o id do html ex: ["html", "${html}"]
+        //caso ja existisse algum conteudo em "1" ele seria movido para 2 ex: ["html", "body"] -> ["html", "${html}", "body"] 
 
         res.send(params.getDefault(1, {html: "nada"}))
 
@@ -59,6 +60,14 @@ você tambem pode utilizar o params ex: <br>
 
         params.delDefault(1)
     }
+```
+
+as palavras que compoem os diretorios ou nomes de arquivos (com relevancia) são:<br>
+
+```txt
+    "get" ou nada para metodo get
+    "post" para metodo post
+    "ignore" para ignorar (não criar rota)    
 ```
 
 compativel com:<br>
