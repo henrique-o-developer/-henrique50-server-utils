@@ -14,7 +14,8 @@ como usar:
 
 `var pages = new server_utils("./pages/", false)` 
 
-o primeiro argumento é o diretorio onde estão suas files para o express, o segundo é se você já tem um server express e quer usa-lo
+o primeiro argumento é o diretorio onde estão suas files para o express, o segundo é se você já tem um server express e quer usa-lo.
+caso já tenha um servidor express use: `app.use(pages.getRoutes())`
 
 
 as files express podem ser: 
