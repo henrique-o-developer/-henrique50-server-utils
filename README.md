@@ -1,5 +1,9 @@
 # server-utils-by-henrique-o-developer
 
+
+please use google translator pt-br
+
+
 esse é um packege para npm desenvolvido para ajudar a criar um site ou api<br>
 
 como usar:<br>
