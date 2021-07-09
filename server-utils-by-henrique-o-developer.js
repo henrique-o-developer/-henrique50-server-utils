@@ -24,6 +24,7 @@ class params {
         this.defaults = [
             `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1.0"><title>\${title}</title></head><body></body>\${body}</html>`
         ];
+        this.addinall = ""
     }
 
     getDefault(index, obj) {
@@ -47,6 +48,10 @@ class params {
     delDefault(index) {
         this.default.splice(index, 1)
     }
+
+    addInAll(text) {
+        this.addinall.push(text)
+    }
 }
 
 class def {
@@ -59,6 +64,10 @@ class def {
         this.routes = new express.Router();
         var folders = []
         var data = fs.readdirSync(path)
+        var add = ""
+        this.addinall.forEach((val) => {
+            add += val
+        })
 
         data.forEach((file) => {
             if (!file.includes("ignore")) {
@@ -77,7 +86,7 @@ class def {
                             })
                         } else if (file.split(".")[1] == "html") {
                             this.routes.post(route, (req, res) => {
-                                res.send(fs.readFileSync(path+"/"+file))
+                                res.send(fs.readFileSync(path+"/"+file) + add)
                             })
                         }
                     }
@@ -88,7 +97,7 @@ class def {
                             })
                         } else if (file.split(".")[1] == "html") {
                             this.routes.get(route, (req, res) => {
-                                res.send(fs.readFileSync(path+"/"+file, {encoding:'utf8', flag:'r'}))
+                                res.send(fs.readFileSync(path+"/"+file, {encoding:'utf8', flag:'r'}) + add)
                             })
                         }
                     }
