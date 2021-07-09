@@ -65,7 +65,7 @@ class def {
         var folders = []
         var data = fs.readdirSync(path)
         var add = ""
-        this.addinall.forEach((val) => {
+        this.params.addinall.forEach((val) => {
             add += val
         })
 
