@@ -60,19 +60,22 @@ class def {
         if (path.endsWith("/"))
             path = path.slice(0, -1);
         this.root = path
+        this.haveServer = haveServer
         this.params = new params();
         this.routes = new express.Router();
+    }
+
+    construct() {
         var folders = []
-        var data = fs.readdirSync(path)
+        var data = fs.readdirSync(this.root)
         var add = ""
         this.params.addinall.forEach((val) => {
             add += val
         })
-
         data.forEach((file) => {
             if (!file.includes("ignore")) {
-                if (isFolder(file, path)) {
-                    folders.push(path+"/"+file)
+                if (isFolder(file, this.root)) {
+                    folders.push(this.root+"/"+file)
                 } else {
                     var route = "/"+file.split(".")[0].replace(/:/g, "/:")
 
@@ -82,22 +85,22 @@ class def {
                     if (route.includes("post")) {
                         if (file.split(".")[1] == "js") {
                             this.routes.post(route, (req, res) => {
-                                require(path+"/"+file)(req, res, this.params)
+                                require(this.root+"/"+file)(req, res, this.params)
                             })
                         } else if (file.split(".")[1] == "html") {
                             this.routes.post(route, (req, res) => {
-                                res.send(fs.readFileSync(path+"/"+file) + add)
+                                res.send(fs.readFileSync(this.root+"/"+file) + add)
                             })
                         }
                     }
-                    if (!route.includes("post") || path.includes("get")) {
+                    if (!route.includes("post") || this.root.includes("get")) {
                         if (file.split(".")[1] == "js") {
                             this.routes.get(route, (req, res) => {
-                                require(path+"/"+file)(req, res, this.params)
+                                require(this.root+"/"+file)(req, res, this.params)
                             })
                         } else if (file.split(".")[1] == "html") {
                             this.routes.get(route, (req, res) => {
-                                res.send(fs.readFileSync(path+"/"+file, {encoding:'utf8', flag:'r'}) + add)
+                                res.send(fs.readFileSync(this.root+"/"+file, {encoding:'utf8', flag:'r'}) + add)
                             })
                         }
                     }
@@ -132,7 +135,7 @@ class def {
                                 })
                             }
                         }
-                        if (!route.includes("post") || path.includes("get")) {
+                        if (!route.includes("post") || this.root.includes("get")) {
                             if (file.split(".")[1] == "js") {
                                 this.routes.get(route, (req, res) => {
                                     require(folders[0]+"/"+file)(req, res, this.params)
@@ -152,12 +155,12 @@ class def {
 
 
 
-        if (haveServer || haveServer == false) {
-            if (typeof(haveServer) == "object") {
+        if (this.haveServer || this.haveServer == false) {
+            if (typeof(this.haveServer) == "object") {
                 const app = express();
                 const server = http.createServer(app);
-                const port = haveServer.port || 3000
-                if (haveServer.useSocket) {
+                const port = this.haveServer.port || 3000
+                if (this.haveServer.useSocket) {
                     const io = new Server(server);
                 }
                 app.use(this.routes)

@@ -14,6 +14,8 @@ como usar:<br>
     var server_utils = require("server-utils-by-henrique-o-developer");
 
     var pages = new server_utils("./pages/", false)
+    
+    pages.construct()
 ```
 
 `var pages = new server_utils("./pages/", false)` <br>
@@ -92,6 +94,7 @@ use (no index com pages.params.addInAl() ou no module.exports) o metodo addInAll
             padding-right: 10px;
         }
     </style>`)
+    pages.construct()
 
     - module -
 
