@@ -73,7 +73,7 @@ class def {
             add += val
         })
         data.forEach((file) => {
-            if (!file.includes("ignore")) {
+            if (!file+this.root.includes("ignore")) {
                 if (isFolder(file, this.root)) {
                     folders.push(this.root+"/"+file)
                 } else {
@@ -110,11 +110,8 @@ class def {
         while (folders.length > 0) {
             var data = fs.readdirSync(folders[0])
             data.forEach((file) => {
-                if (file.includes("ignore")) {
-                    delete folders[0]
-                    folders.splice(0, 1)
-                    return
-                } else {
+                console.log(folders)
+                if (!file+folders[0].includes("ignore")) {
                     if (isFolder(file, folders[0])) {
                         folders.push(folders[0]+"/"+file)
                     } else {
@@ -142,6 +139,7 @@ class def {
                                 })
                             } else if (file.split(".")[1] == "html") {
                                 this.routes.get(route, (req, res) => {
+                                    console.log(folders)
                                     res.send(fs.readFileSync(folders[0]+"/"+file))
                                 })
                             }
