@@ -74,6 +74,41 @@ as palavras que compoem os diretorios ou nomes de arquivos (com relevancia) são
     "ignore" para ignorar (não criar rota)    
 ```
 
+<br>
+use (no index com pages.params.addInAl() ou no module.exports) o metodo addInAll(text): 
+
+```js
+    - index.js -
+
+    const server_utils = require("server-utils-by-henrique-o-developer")
+    const pages = new server_utils(__dirname+"/pages")
+    pages.params.addInAll(`<style>
+        .borrado {
+            display: box;
+            position: initial;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    </style>`)
+
+    - module -
+
+    module.exports = (req, res, params) => {
+        params.addInAll(`<style>
+            .borrado {
+                display: box;
+                position: initial;
+                background: rgba(0, 0, 0, 0.2);
+                border-radius: 15px;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        </style>`)
+    }
+```
+
 compativel com:<br>
     react<br>
     react-dom<br>
